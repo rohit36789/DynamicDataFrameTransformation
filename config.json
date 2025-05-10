@@ -1,0 +1,130 @@
+{
+    "total_task" : 2,
+   "task1" : {
+        "source": {
+            "type": "csv",
+            "options": {
+                "path": "data/input.csv",
+                "header": true,
+                "delimiter": ","
+            }
+        },
+        "transformations": [
+            {
+                "operation": "select",
+                "params": {
+                    "columns": [
+                        "Name",
+                        "Age",
+                        "Dept",
+                        "Salary"
+                    ]
+                }
+            },
+            {
+                "operation": "filter",
+                "params": {
+                    "condition": "Age > 25"
+                }
+            },
+            {
+                "operation": "withColumn",
+                "params": {
+                    "column_name": "Incremented_Salary",
+                    "expression": "Salary + (Salary*0.15)"
+                }
+            },
+            {
+                "operation": "rename",
+                "params": {
+                    "old_name": "Dept",
+                    "new_name": "Department"
+                }
+            },
+            {
+                "operation": "aggregate",
+                "params": {
+                    "group_by": [
+                        "Department"
+                    ],
+                    "aggregations": [
+                        [
+                            "Incremented_Salary",
+                            "avg",
+                            "Department_average_salary"
+                        ]
+                    ]
+                }
+            }
+        ],
+        "action": {
+            "type": "show",
+            "params": {
+                "num_rows": 20
+            }
+        }
+    },
+    "task2":{
+        "source": {
+            "type": "csv",
+            "options": {
+                "path": "data/input.csv",
+                "header": true,
+                "delimiter": ","
+            }
+        },
+        "transformations": [
+            {
+                "operation": "select",
+                "params": {
+                    "columns": [
+                        "Name",
+                        "Age",
+                        "Dept",
+                        "Salary"
+                    ]
+                }
+            },
+            {
+                "operation": "filter",
+                "params": {
+                    "condition": "Age > 25"
+                }
+            },
+            {
+                "operation": "withColumn",
+                "params": {
+                    "column_name": "Incremented_Salary",
+                    "expression": "Salary + (Salary*0.15)"
+                }
+            },
+            {
+                "operation": "rename",
+                "params": {
+                    "old_name": "Dept",
+                    "new_name": "Department"
+                }
+            },
+            {
+                "operation": "aggregate",
+                "params": {
+                    "group_by": [
+                    ],
+                    "aggregations": [
+                        [
+                            "Incremented_Salary",
+                            "avg",
+                            "average_salary"
+                        ]
+                    ]
+                }
+            }
+        ],
+        "action": {
+            "type": "show",
+            "params": {
+                "num_rows": 20
+            }
+        }
+    }
+}
